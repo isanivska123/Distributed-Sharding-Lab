@@ -1,11 +1,12 @@
-name: CI-CD Pipeline
+name: Terraform Deploy
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: 
 
 jobs:
-  test-and-syntax-check:
+  check-and-plan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -16,24 +17,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: pip install fastapi uvicorn requests pydantic
-
       - name: Syntax Check
-        run: |
-          python -m py_compile app/coordinator.py app/shard.py app/hashing.py app/models.py
-
-  terraform-plan:
-    needs: test-and-syntax-check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+        run: python -m py_compile app/coordinator.py app/shard.py app/hashing.py app/models.py
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      - name: Terraform Init and Plan
+      - name: Terraform Init & Plan
         run: |
           cd terraform
           terraform init
