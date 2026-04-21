@@ -3,9 +3,8 @@ provider "aws" {
 }
 
 resource "aws_instance" "coordinator" {
-  ami           = "ami-0705383d0b3ee1b10" 
-  instance_type = "t3.micro"               
-
+  ami                    = "ami-0705383d0b3ee1b10"
+  instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.laba_sg.id]
 
   tags = {
@@ -14,10 +13,9 @@ resource "aws_instance" "coordinator" {
 }
 
 resource "aws_instance" "shards" {
-  count         = 2
-  ami           = "ami-0705383d0b3ee1b10" 
-  instance_type = "t3.micro"
-
+  count                  = 2
+  ami                    = "ami-0705383d0b3ee1b10"
+  instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.laba_sg.id]
 
   tags = {
