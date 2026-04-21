@@ -1,11 +1,11 @@
 provider "aws" {
-  region = "eu-north-1"  
+  region = "eu-north-1"
 }
 
 resource "aws_instance" "coordinator" {
-  ami           = "ami-000e50100c55f77bb" 
-  instance_type = "t2.micro"            
-  
+  ami           = "ami-0705383d0b3ee1b10" 
+  instance_type = "t3.micro"               
+
   vpc_security_group_ids = [aws_security_group.laba_sg.id]
 
   tags = {
@@ -15,9 +15,9 @@ resource "aws_instance" "coordinator" {
 
 resource "aws_instance" "shards" {
   count         = 2
-  ami           = "ami-000e50100c55f77bb"
-  instance_type = "t2.micro"
-  
+  ami           = "ami-0705383d0b3ee1b10" 
+  instance_type = "t3.micro"
+
   vpc_security_group_ids = [aws_security_group.laba_sg.id]
 
   tags = {
