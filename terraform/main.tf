@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 resource "aws_instance" "coordinator" {
-  ami                    = "ami-0705383d0b3ee1b10"
-  instance_type          = "t3.micro"
-  vpc_security_group_ids = [aws_security_group.laba_sg.id]
+  ami           = "ami-0705383d0b3ee1b10"
+  instance_type = "t3.micro"
+  vpc_security_group_ids = ["sg-0c558256fc8403fb0"]
 
   tags = {
     Name = "Sharding-Coordinator"
@@ -13,10 +13,10 @@ resource "aws_instance" "coordinator" {
 }
 
 resource "aws_instance" "shards" {
-  count                  = 2
-  ami                    = "ami-0705383d0b3ee1b10"
-  instance_type          = "t3.micro"
-  vpc_security_group_ids = [aws_security_group.laba_sg.id]
+  count         = 2
+  ami           = "ami-0705383d0b3ee1b10"
+  instance_type = "t3.micro"
+  vpc_security_group_ids = ["sg-0c558256fc8403fb0"]
 
   tags = {
     Name = "Shard-Node-${count.index + 1}"
