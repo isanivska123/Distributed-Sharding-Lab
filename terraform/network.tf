@@ -1,5 +1,5 @@
 resource "aws_security_group" "laba_sg" {
-  name        = "sharding_lab_sg"
+  name        = "sharding_lab2_sg"
   description = "Allow HTTP and SSH traffic"
 
   ingress {
